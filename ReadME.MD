@@ -6,14 +6,14 @@ EventSource is a built-in JavaScript API used to open a persistent connection to
 
 ## How it works:
 #### EventSource: 
-    - When you create an EventSource object, it establishes an open, long-lived HTTP connection to the server, which can continuously send messages to the client.
+    - When you create an EventSource object, it establishes an open (another event), long-lived HTTP connection to the server, which can continuously send messages to the client.
 
     - new EventSource("/events"): This creates a new instance of EventSource that connects to the /events endpoint on the server. The URL /events is the server endpoint that the client will listen to for incoming messages.
 
 #### Server-Side Behavior:
-    - The server (in your case, written in Go) will send data to the client in a specific format called Server-Sent Events (SSE), which is a standard for delivering data to the browser over a single HTTP connection.
+    - The server will send data to the client in a specific format called Server-Sent Events (SSE), which is a standard for delivering data to the browser over a single HTTP connection.
 
-    - SSE allows the server to push messages to the client as long as the connection is open. This is different from regular HTTP requests where the client has to repeatedly request new data (e.g., polling).
+    - SSE allows the server to push messages to the client as long as the connection is open. This is different from regular HTTP requests where the client has to repeatedly request new data.
 
 ## Explained:
     A server-sent event is when a web page automatically gets updates from a server.
