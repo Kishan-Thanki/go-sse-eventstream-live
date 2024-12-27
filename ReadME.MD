@@ -14,3 +14,24 @@ EventSource is a built-in JavaScript API used to open a persistent connection to
     - The server (in your case, written in Go) will send data to the client in a specific format called Server-Sent Events (SSE), which is a standard for delivering data to the browser over a single HTTP connection.
 
     - SSE allows the server to push messages to the client as long as the connection is open. This is different from regular HTTP requests where the client has to repeatedly request new data (e.g., polling).
+
+## Explained:
+    A server-sent event is when a web page automatically gets updates from a server.
+
+    This was also possible before, but the web page would have to ask if any updates were available. With server-sent events, the updates come automatically.
+
+### Client-Side:
+    - Create a new EventSource object, and specify the URL of the page sending the updates (in this example "/events")
+    - Each time an update is received, the onmessage event occurs
+    - When an onmessage event occurs, put the received data into the element with id="resp"
+
+    The EventSource Events:
+    `onerror`: This event handler is called when an error occurs during the connection or while receiving messages.
+
+    `close()`: This method closes the connection to the server.
+
+### Server-Side:
+    - Set the "Content-Type" header to "text/event-stream"
+    - Specify that the page should not cache
+    - Output the data to send (Always start with "data: ")
+    - Flush the output data back to the web page
