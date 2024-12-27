@@ -1,4 +1,4 @@
-# NOTE: This is just a simple demostration of real-time events. It is experimental
+### NOTE: This is just a simple demostration of real-time events. It is experimental
 
 # SSE (SERVER-SIDE EVENTS) 
 Server-Sent Events (SSE) is a technology that allows real-time communication from the server to the client via a persistent connection. 
