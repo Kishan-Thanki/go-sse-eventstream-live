@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Go-LiveTest</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 20px;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+      h2 {
+        color: #0056b3;
+      }
+      #resp {
+        padding: 20px;
+        border: 1px solid #ddd;
+        background-color: #fff;
+        min-height: 50px;
+        font-size: 16px;
+        white-space: pre-line; /* Preserves new lines in messages */
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Real-Time Response:</h2>
+    <div id="resp"></div> <!-- Using div instead of p for better control -->
+
+    <script>
+      // Establish the EventSource connection
+      const sse = new EventSource("/events");
+      const responseElement = document.getElementById("resp");
+
+      // Append each incoming message to the response div, on separate lines
+      sse.onmessage = (event) => {
+        responseElement.innerHTML += `${event.data} `;  // Appends the event data with a line break
+      };
+
+      // Handle errors gracefully without reconnecting
+      sse.onerror = () => {
+        responseElement.innerHTML += "<br><strong>Connection lost. Refresh the page to reconnect.</strong>";
+        sse.close();  // Close the connection
+      };
+    </script>
+  </body>
+</html>
